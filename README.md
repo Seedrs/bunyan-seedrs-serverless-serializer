@@ -12,10 +12,10 @@ proxy event objects and responses.
 1. Installation
 ```
 # With npm
-npm i --save bunyan-seedrs-serverless-serializer
+npm i --save @seedrs/bunyan-seedrs-serverless-serializer
 
 # With yarn
-yarn add bunyan-seedrs-serverless-serializer --save
+yarn add @seedrs/bunyan-seedrs-serverless-serializer --save
 ```
 
 2. Code example
@@ -97,7 +97,11 @@ const handler = (event, context, callback) => {
 
 1. Running tests in done with the following command
 ```
+// Single test run
 npm run test
+
+// Watch
+npm run test:watch
 ```
 
 ## Contributing

@@ -1,6 +1,6 @@
 {
   "name": "@seedrs/bunyan-seedrs-serverless-serializer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A bunyan serializer for serverless events",
   "main": "index.js",
   "scripts": {

@@ -54,7 +54,8 @@ const handler = (event, context, callback) => {
       "user_agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36",
       "host":"localhost:3000",
       "request_id":"offlineContext_requestId_",
-      "stage":"dev"
+      "stage":"dev",
+      "path": "/test/path"
     },
     "msg":"",
     "time":"2017-12-11T14:23:24.416Z",
@@ -84,7 +85,9 @@ const handler = (event, context, callback) => {
         },
         "message":"Go Serverless Webpack (Ecma Script) v1.0! Second module!"
       },
-      "statusCode":200
+      "statusCode":200,
+      "request_id":"offlineContext_requestId_",
+      "path": "/test/path"
     },
     "msg":"",
     "time":"2017-12-11T14:23:24.416Z",

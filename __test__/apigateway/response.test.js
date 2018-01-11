@@ -21,10 +21,14 @@ describe('api gateway response serializer', () => {
         'Access-Allow-Origin': '*.seedrs.com',
         'Content-Type': 'application/json'
       },
-      statusCode: 200
+      statusCode: 200,
+      path: 'http://test/path',
+      request_id: 'requestid'
     };
     const response = {
       statusCode: 200,
+      path: 'http://test/path',
+      request_id: 'requestid',
       headers: {
         'Access-Allow-Origin': '*.seedrs.com',
         'Content-Type': 'application/json'

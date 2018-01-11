@@ -22,6 +22,7 @@ describe('api gateway event serializer', () => {
       queryStringParameters: {
         order_by: 'created_at'
       },
+      path: 'http://test/path',
       body: null
     };
     const event = {
@@ -37,6 +38,7 @@ describe('api gateway event serializer', () => {
       queryStringParameters: {
         order_by: 'created_at'
       },
+      path: 'http://test/path',
       body: null
     };
 

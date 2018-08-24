@@ -1,4 +1,4 @@
-const serializer = require('../../lib/serializers/apigateway/response');
+import serializer from 'lib/serializers/apigateway/response';
 
 describe('api gateway response serializer', () => {
 

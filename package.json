@@ -2,15 +2,14 @@
   "name": "@seedrs/bunyan-seedrs-serverless-serializer",
   "version": "1.0.1",
   "description": "A bunyan serializer for serverless events",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
+    "build": "babel src -d lib",
+    "lint": "eslint ./src/*",
     "test": "jest",
     "test:watch": "jest --watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/seedrs/bunyan-seedrs-serverless-serializer.git"
-  },
+  "repository": "https://github.com/seedrs/bunyan-seedrs-serverless-serializer.git",
   "keywords": [
     "serverless",
     "bunyan",
@@ -21,9 +20,33 @@
   "bugs": {
     "url": "https://github.com/seedrs/bunyan-seedrs-serverless-serializer/issues"
   },
+  "jest": {
+    "testMatch": [
+      "<rootDir>/__tests__/**/*.test.js"
+    ],
+    "moduleNameMapper": {
+      "^lib(.+)": "<rootDir>/src/lib$1"
+    }
+  },
   "homepage": "https://github.com/seedrs/bunyan-seedrs-serverless-serializer#readme",
   "devDependencies": {
+    "@seedrs/eslint-config-seedrs-base": "^1.0.3",
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.6",
+    "babel-preset-env": "^1.7.0",
     "bunyan": "^1.8.12",
-    "jest": "^21.2.1"
+    "commitizen": "^2.10.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "eslint": "^5.4.0",
+    "eslint-plugin-import": "^2.14.0",
+    "jest": "^21.2.1",
+    "semantic-release": "^15.9.9"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

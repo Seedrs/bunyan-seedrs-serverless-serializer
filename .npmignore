@@ -1,0 +1,11 @@
+node_modules
+.DS_Store
+src
+jest_*
+*.log
+yarn.lock
+Dockerfile
+docker-compose.buildkite.yml
+__tests__
+.buildkite
+.git

@@ -4,8 +4,9 @@
   "description": "A bunyan serializer for serverless events",
   "main": "lib/index.js",
   "scripts": {
+    "commit": "git-cz",
     "build": "babel src -d lib",
-    "lint": "eslint ./src/*",
+    "lint": "eslint ./__tests__ ./src",
     "test": "jest",
     "test:watch": "jest --watch"
   },
@@ -35,12 +36,15 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",
+    "babel-plugin-module-resolver": "^3.1.1",
     "babel-preset-env": "^1.7.0",
     "bunyan": "^1.8.12",
     "commitizen": "^2.10.1",
     "cz-conventional-changelog": "^2.1.0",
     "eslint": "^5.4.0",
+    "eslint-import-resolver-babel-module": "^4.0.0",
     "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^21.21.0",
     "jest": "^21.2.1",
     "semantic-release": "^15.9.9"
   },

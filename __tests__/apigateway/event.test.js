@@ -26,11 +26,11 @@ describe('api gateway event serializer', () => {
     const event = {
       headers: {
         Host: '192.168.0.1',
-        'User-Agent': 'User-agent',
+        'User-Agent': 'User-agent'
       },
       requestContext: {
         stage: 'dev',
-        requestId: 'requestid',
+        requestId: 'requestid'
       },
       httpMethod: 'GET',
       queryStringParameters: {

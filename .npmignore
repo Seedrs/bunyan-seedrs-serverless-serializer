@@ -9,3 +9,6 @@ docker-compose.buildkite.yml
 __tests__
 .buildkite
 .git
+README.md
+.babelrc
+.dockerignore

@@ -10,6 +10,8 @@ git config user.name "seedrs.bot"
 
 git checkout -b $BUILDKITE_JOB_ID
 
+yarn build
+
 yarn semantic-release
 
 echo "Publish complete"

@@ -21,18 +21,6 @@ steps:
 
   - wait
 
-  - label: ':package: build'
-    command: .buildkite/steps/build.sh
-    agents:
-      queue: npm-packages
-    branches: master
-    plugins:
-      docker-compose#v2.5.1:
-        config: docker-compose.buildkite.yml
-        run: bunyan_serverless_serializer
-
-  - wait
-
   - label: ':rocket: publish'
     command: .buildkite/steps/publish.sh
     agents:

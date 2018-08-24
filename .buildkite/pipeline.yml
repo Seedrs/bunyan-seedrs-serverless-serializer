@@ -1,0 +1,46 @@
+steps:
+  - label: ':eslint: Lint'
+    command: .buildkite/steps/lint.sh
+    agents:
+      queue: npm-packages
+    plugins:
+      docker-compose#v2.5.1:
+        config: docker-compose.buildkite.yml
+        run: bunyan_serverless_serializer
+
+  - wait
+
+  - label: ':jest: Test'
+    command: .buildkite/steps/test.sh
+    agents:
+      queue: npm-packages
+    plugins:
+      docker-compose#v2.5.1:
+        config: docker-compose.buildkite.yml
+        run: bunyan_serverless_serializer
+
+  - wait
+
+  - label: ':package: build'
+    command: .buildkite/steps/build.sh
+    agents:
+      queue: npm-packages
+    branches: master
+    plugins:
+      docker-compose#v2.5.1:
+        config: docker-compose.buildkite.yml
+        run: bunyan_serverless_serializer
+
+  - wait
+
+  - label: ':rocket: publish'
+    command: .buildkite/steps/publish.sh
+    agents:
+      queue: npm-packages
+    branches: master
+    concurrency: 1
+    concurrency_group: 'bunyan-serverless-serializers/publish'
+    plugins:
+      docker-compose#v2.5.1:
+        config: docker-compose.buildkite.yml
+        run: bunyan_serverless_serializer

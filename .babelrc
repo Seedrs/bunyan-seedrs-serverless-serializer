@@ -1,0 +1,21 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "useBuiltins": true,
+        "targets": {
+          "node": "5.12.0"
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    ["module-resolver",{
+      "root": "./src",
+      "alias": {
+        "lib": "./src/lib"
+      }
+    }]
+  ]
+}

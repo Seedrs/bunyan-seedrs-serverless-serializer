@@ -1,9 +1,7 @@
-const serializer = require('../../lib/serializers/apigateway/event');
+import serializer from 'lib/serializers/apigateway/event';
 
 describe('api gateway event serializer', () => {
-
   describe('when event is not an object', () => {
-
     it('returns the value it was passed', () => {
       const expected = 'Hello';
       const event = 'Hello';
@@ -28,11 +26,11 @@ describe('api gateway event serializer', () => {
     const event = {
       headers: {
         Host: '192.168.0.1',
-        'User-Agent': 'User-agent',
+        'User-Agent': 'User-agent'
       },
       requestContext: {
         stage: 'dev',
-        requestId: 'requestid',
+        requestId: 'requestid'
       },
       httpMethod: 'GET',
       queryStringParameters: {
@@ -45,5 +43,3 @@ describe('api gateway event serializer', () => {
     expect(serializer(event)).toEqual(expected);
   });
 });
-
-

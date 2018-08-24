@@ -1,3 +1,6 @@
 node_modules
 .DS_Store
+lib
+!src/lib
 jest_*
+yarn-error.log

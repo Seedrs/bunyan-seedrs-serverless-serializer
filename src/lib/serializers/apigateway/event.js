@@ -1,6 +1,6 @@
-const isObject = require('../../util').isObject;
+import isObject from 'lib/util';
 
-module.exports = (event) => {
+const event = (event) => {
   if (!isObject(event)) {
     return event;
   } else {
@@ -26,3 +26,4 @@ module.exports = (event) => {
   }
 };
 
+export default event;

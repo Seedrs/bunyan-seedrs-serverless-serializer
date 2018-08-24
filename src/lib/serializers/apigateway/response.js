@@ -1,6 +1,6 @@
-const isObject = require('../../util').isObject;
+import isObject from 'lib/util';
 
-module.exports = (res) => {
+const response = (res) => {
   if (!isObject(res)) {
     return res;
   } else {
@@ -20,4 +20,6 @@ module.exports = (res) => {
       request_id
     };
   }
-}
+};
+
+export default response;

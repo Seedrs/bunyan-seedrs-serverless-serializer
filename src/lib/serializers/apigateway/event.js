@@ -1,4 +1,4 @@
-import isObject from 'lib/util';
+import { isObject } from 'lib/util';
 
 const event = (event) => {
   if (!isObject(event)) {

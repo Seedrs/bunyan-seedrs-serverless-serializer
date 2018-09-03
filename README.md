@@ -1,11 +1,17 @@
-# Bunyan seedrs serverless serializer
+# bunyan-seedrs-serverless-serializer
 
-## Description
+[![Build status](https://badge.buildkite.com/f030295b9a489fbaf03109a045601898d8f5e8e4a8dcd848d4.svg)](https://buildkite.com/seedrs/bunyan-serverless-serializers) [![npm version](https://badge.fury.io/js/%40seedrs%2Fbunyan-seedrs-serverless-serializer.svg)](https://badge.fury.io/js/%40seedrs%2Fbunyan-seedrs-serverless-serializer) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 This is a collection of serializers for the bunyan logger.  It allows
 the developer to have a consistent logging format across all serverless
-projects. It currently only contains serializers for API gateway lambda
-proxy event objects and responses.
+projects.
+
+## Serializers
+
+- apiGatewayEvent
+- apiGatewayResponse
+- s3Event
+- dynamodbStreamEvent
 
 ## Usage
 
@@ -18,12 +24,14 @@ npm i --save @seedrs/bunyan-seedrs-serverless-serializer
 yarn add @seedrs/bunyan-seedrs-serverless-serializer --save
 ```
 
-2. Code example
+2. Setup bunyan with the serializers.
 ```javascript
 const bunyan = require('bunyan');
 const {
   apiGatewayEvent,
-  apiGatewayResponse
+  apiGatewayResponse,
+  s3Event,
+  dynamodbStreamEvent
 } = require('bunyan-seedrs-serverless-serializer');
 
 const logger = bunyan.createLogger({
@@ -31,13 +39,18 @@ const logger = bunyan.createLogger({
   stream: process.stdout,
   level: 'info',
   serializers: {
-    event: apiGatewayEvent,
-    response: apiGatewayResponse
+    apiGatewayEvent,
+    apiGatewayResponse,
+    s3Event,
+    dynamodbStreamEvent
   }
 });
+```
 
+3. Code example for API gateway events and responses.
+```javascript
 const handler = (event, context, callback) => {
-  logger.info({ event })
+  logger.info({ apiGatewayEvent: event });
 
   /* This will log the following fields from event to the log
   {
@@ -45,7 +58,7 @@ const handler = (event, context, callback) => {
     "hostname":"host",
     "pid":53293,
     "level":30,
-    "event": {
+    "apiGatewayEvent": {
       "queryStringParameters":{
         "order_by[created_at]":"desc"
       },"
@@ -71,14 +84,14 @@ const handler = (event, context, callback) => {
   };
 
   // To log responses in the aws lambda proxy format
-  logger.info({ response });
+  logger.info({ apiGatewayResponse: response });
   /*
   {
     "name":"myapp",
     "hostname":"host",
     "pid":53293,
     "level":30,
-    "response": {
+    "apiGatewayResponse": {
       "body":{
         "headers": {
           "Access-Control-Allow-Origin": "*",
@@ -94,11 +107,73 @@ const handler = (event, context, callback) => {
     "v":0
   }
   */
+};
 ```
 
-## Tests
+4. Code example for S3 events.
 
-1. Running tests in done with the following command
+```javascript
+const handler = (event, context, callback) => {
+  logger.info({ s3Event: event });
+
+  /*
+  {
+    "name": "myapp",
+    "hostname": "host",
+    "pid":53293,
+    "level":30,
+    "s3Event": {
+      "files": [
+        {
+          "requestId": "Amazon s3 generated request ID",
+          "eventTime": "1970-01-01T00:00.000Z",
+          "eventName": "event-type",
+          "key": "object-key",
+          "size": 1024,
+          "bucket": "bucket-name"
+        }
+      ],
+    }
+  }
+  */
+};
+```
+
+5. Code example for dynamo db stream events.
+
+```javascript
+const handler = (event, context callback) => {
+  logger.info({ dynamodbStreamEvent: event });
+
+  /*
+  {
+    "name": "myapp",
+    "hostname": "host",
+    "pid":53293,
+    "level": 30,
+    "dynamodbStreamEvent": {
+      "eventId": '51609bad-7070-4dd9-9f80-cd353bb12c0c',
+      "eventName": 'REMOVE',
+      "eventSource": 'aws:dynamodb',
+      "awsRegion": 'ddblocal',
+      "approximateCreationDateTime": '2018-08-31T13:23:00.000Z',
+      "keys": {
+        "parent_resource": {
+          "S": 'business::1::campaign::1'
+        },
+        "file_type_tag_name": {
+          "S": 'document::legal_document::something.txt'
+        }
+      }
+    }
+  */
+};
+```
+
+## Tests and linting
+
+1. Running tests is done with the following command
+
 ```
 // Single test run
 npm run test
@@ -107,8 +182,22 @@ npm run test
 npm run test:watch
 ```
 
+2. Linting is done with the following command
+
+```
+yarn lint
+```
+
 ## Contributing
 
-1. Open a PR with a description of the issue or feature you want to
-   solve/add. Lets discuss it in the PR.
+This project uses semantic release. When making a commit use this
+command:
 
+```
+yarn commit
+```
+
+Follow the onscreen instructions to choose the correct description for
+your change.
+
+Open a PR with a description of the feature/change you wish to make.

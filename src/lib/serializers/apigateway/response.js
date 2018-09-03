@@ -1,4 +1,4 @@
-import isObject from 'lib/util';
+import { isObject } from 'lib/util';
 
 const response = (res) => {
   if (!isObject(res)) {

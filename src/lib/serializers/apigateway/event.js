@@ -17,6 +17,12 @@ const event = (event) => {
       queryStringParameters,
       body,
       path,
+      headers: Object.keys(headers).filter(
+        key => key.toLowerCase() !== 'host' && key.toLowerCase() !== 'authorization'
+      ).reduce((memo,val) => {
+        memo[val] = headers[val];
+        return memo;
+      },{}),
       method: httpMethod,
       user_agent: headers && headers['User-Agent'],
       host: headers && headers.Host,

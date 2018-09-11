@@ -20,13 +20,17 @@ describe('api gateway event serializer', () => {
       queryStringParameters: {
         order_by: 'created_at'
       },
+      headers: {
+        'User-Agent': 'User-agent'
+      },
       path: 'http://test/path',
       body: null
     };
     const event = {
       headers: {
         Host: '192.168.0.1',
-        'User-Agent': 'User-agent'
+        'User-Agent': 'User-agent',
+        Authorization: 'dont-log-me'
       },
       requestContext: {
         stage: 'dev',
